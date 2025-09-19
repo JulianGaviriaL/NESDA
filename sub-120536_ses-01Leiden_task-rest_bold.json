@@ -1,0 +1,26 @@
+{
+  "Manufacturer": "Philips",
+  "PatientPosition": "HFS",
+  "SeriesDescription": "ImageMRSERIES",
+  "ProtocolName": "RestingstateSENSE",
+  "SeriesNumber": 8,
+  "AcquisitionNumber": 8,
+  "ImageComments": "NESDA_120536",
+  "PhilipsRescaleSlope": 1.634,
+  "PhilipsRescaleIntercept": 0,
+  "PhilipsScaleSlope": 0.001339,
+  "UsePhilipsFloatNotDisplayScaling": 1,
+  "EchoTime": 0.03,
+  "ImageOrientationPatientDICOM": [
+    0.998234,
+    -0.00075851,
+    -0.0594038,
+    -0.00348451,
+    0.997449,
+    -0.0712905
+  ],
+  "ConversionSoftware": "dcm2niix",
+  "ConversionSoftwareVersion": "v1.0.20250505",
+  "TaskName": "rest",
+  "RepetitionTime": 2.3150
+}
