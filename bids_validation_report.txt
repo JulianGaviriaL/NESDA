@@ -1,14 +1,7 @@
 bids-validator@1.15.0
-(node:9576) Warning: Closing directory handle on garbage collection
+(node:18812) Warning: Closing directory handle on garbage collection
 (Use `node --trace-warnings ...` to show where the warning was created)
-	[31m1: [ERR] Invalid JSON file. The file is not formatted according the schema. (code: 55 - JSON_SCHEMA_VALIDATION_ERROR)[39m
-		./dataset_description.json
-			Invalid JSON file. The file is not formatted according the schema.
-			Evidence: .DatasetLinks['derivative'] should be string
-
-[36m	Please visit https://neurostars.org/search?q=JSON_SCHEMA_VALIDATION_ERROR for existing conversations about this issue.[39m
-
-	[31m2: [ERR] A json sidecar file was found without a corresponding data file (code: 90 - SIDECAR_WITHOUT_DATAFILE)[39m
+	[31m1: [ERR] A json sidecar file was found without a corresponding data file (code: 90 - SIDECAR_WITHOUT_DATAFILE)[39m
 		./sub-120472/ses-ams03/func/sub-120472_ses-ams03_task-rest_bold.json
 			A json sidecar file was found without a corresponding data file
 		./sub-120475/ses-ams02/func/sub-120475_ses-ams02_task-rest_bold.json
