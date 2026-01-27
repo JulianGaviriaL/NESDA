@@ -1,0 +1,60 @@
+
+## 1. SLICETIMING CALCULATION (2 Stages)
+
+### Stage 1: Extract Parameters from PAR
+- **RepetitionTime** (TR) [ms]
+- **Number of slices** (n_slices)
+
+### Stage 2: Calculate SliceTiming Array
+```python
+# Step 1: Time per slice
+time_per_slice = TR / n_slices
+
+Reference: 
+MRI physics toolbox: 
+Huettel, S. A., Song, A. W., & McCarthy, G. (2014). Functional Magnetic Resonance Imaging (3rd ed.). Sinauer Associates.
+
+# Step 2: Define acquisition order (Philips interleaved ascending)
+acquisition_order = [0,2,4,...,n-2] + [1,3,5,...,n-1]
+
+# Step 3: Calculate timing for each slice
+slice_timing[i] = acquisition_order.index(i) × time_per_slice
+
+References
+Source: dcm2niix (nii_philips.cpp)
+GitHub: https://github.com/rordenlab/dcm2niix
+Source file: nii_philips.cpp (lines 1470-1520)
+
+##############################################################################33
+
+2. EFFECTIVE ECHO SPACING CALCULATION (3 Stages)
+
+Overview
+EffectiveEchoSpacing calculated from Philips PAR files using the water-fat shift method, following standard practice in 
+the neuroimaging community for Philips 3T data.
+https://neurostars.org/t/consolidating-epi-echo-spacing-and-readout-time-for-philips-scanner/4406
+https://github.com/rordenlab/dcm2niix/issues/377
+
+Implementation
+Stage 1: Extract Water-Fat Shift
+Python
+# Search PAR file for "Water Fat shift [pixels]"
+water_fat_shift = 8.5  # example value in pixels
+
+Stage 2: Extract Reconstruction Matrix
+Python
+# Search PAR file for "Recon resolution (x, y)"
+recon_matrix_pe = 80  # y-dimension (phase-encoding direction)
+Stage 3: Calculate Bandwidth per Pixel
+Python
+bandwidth_factor = 434.215  # Hz (water-fat chemical shift at 3T)
+bandwidth_per_pixel_hz = 434.215 / water_fat_shift
+Constant 434.215 Hz:
+
+Water-fat chemical shift at 3 Tesla for Philips systems
+Derived from: γ (42.57 MHz/T) × B₀ (3T) × δ (3.5 ppm) ≈ 447 Hz theoretical
+Philips uses 434.215 Hz (empirically calibrated)
+Stage 4: Calculate EffectiveEchoSpacing
+Python
+ees = 1.0 / (bandwidth_per_pixel_hz * recon_matrix_pe)
+EffectiveEchoSpacing = round(ees, 8)  # seconds
