@@ -1,6 +1,6 @@
 
 ## 1. SLICETIMING CALCULATION (2 Stages)
-
+# this information is necessary for slice timing correction in the preprocessing.
 ### Stage 1: Extract Parameters from PAR
 - **RepetitionTime** (TR) [ms]
 - **Number of slices** (n_slices)
@@ -57,4 +57,5 @@ Philips uses 434.215 Hz (empirically calibrated)
 Stage 4: Calculate EffectiveEchoSpacing
 Python
 ees = 1.0 / (bandwidth_per_pixel_hz * recon_matrix_pe)
+
 EffectiveEchoSpacing = round(ees, 8)  # seconds
